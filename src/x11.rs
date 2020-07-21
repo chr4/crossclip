@@ -23,7 +23,6 @@ impl Clipboard for X11Clipboard {
 
     fn get_string_contents(&self) -> Result<String, ClipboardError> {
         Ok(String::from_utf8(self.inner.load(
-            self.inner.getter.atoms.clipboard,
             self.inner.getter.atoms.utf8_string,
             self.inner.getter.atoms.property,
             Duration::from_secs(3),
@@ -40,10 +39,8 @@ impl Clipboard for X11Clipboard {
     }
 
     fn set_string_contents(&self, contents: String) -> Result<(), ClipboardError> {
-        Ok(self.inner.store(
-            self.inner.setter.atoms.clipboard,
-            self.inner.setter.atoms.utf8_string,
-            contents,
-        )?)
+        Ok(self
+            .inner
+            .store(self.inner.setter.atoms.utf8_string, contents)?)
     }
 }
