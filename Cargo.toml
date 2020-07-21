@@ -20,5 +20,8 @@ objc = "0.2.7"
 objc_id = "0.1.1"
 objc-foundation = "0.1.1"
 
+# Cross compiling musl fails on x11-clipboard > 0.3.3, as it changed the dependency from xcb from
+# 0.8 to 0.9
+# ld: cannot find -lxcb
 [target.'cfg(any(target_os = "linux", target_os = "openbsd"))'.dependencies]
-x11-clipboard = "0.5.1"
+x11-clipboard = "0.3.3"
