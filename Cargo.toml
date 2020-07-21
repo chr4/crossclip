@@ -13,15 +13,12 @@ license = "MIT OR Apache-2.0"
 edition = "2018"
 
 [target.'cfg(windows)'.dependencies]
-clipboard-win = "3.1.1"
+clipboard-win = "2.1"
 
 [target.'cfg(target_os = "macos")'.dependencies]
-objc = "0.2.7"
-objc_id = "0.1.1"
-objc-foundation = "0.1.1"
+objc = "0.2"
+objc_id = "0.1"
+objc-foundation = "0.1"
 
-# Cross compiling musl fails on x11-clipboard > 0.3.3, as it changed the dependency from xcb from
-# 0.8 to 0.9
-# ld: cannot find -lxcb
-[target.'cfg(any(target_os = "linux", target_os = "openbsd"))'.dependencies]
-x11-clipboard = "0.3.3"
+[target.'cfg(all(unix, not(any(target_os="macos", target_os="android", target_os="emscripten"))))'.dependencies]
+x11-clipboard = "0.3"
